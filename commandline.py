@@ -11,8 +11,16 @@ print "Connected to serial port. Use control^C or control^D to exit."
 while True:
     try:
         input = raw_input("# ")
+        s.flushInput()
         s.write(input + '\n')
-        print s.readline(),
+        while True:
+            try:
+                output = s.read()
+                sys.stdout.write(output)
+                if(output == '\n'): break
+            except KeyboardInterrupt:
+                print "Interrupted by user"
+                break
     except (KeyboardInterrupt, EOFError):
         print "\nGot 'quit' from user. Bye!"
         s.close()
