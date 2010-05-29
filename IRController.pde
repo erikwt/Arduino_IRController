@@ -50,6 +50,8 @@ void command(char *input){
         blink();
     }else if(!strcmp(input, "ping")){
         Serial.write("pong");
+    }else if(!strcmp(input, "uptime")){
+        uptime();
     }else if(!strcmp(input, "makepic")){
         makepic();
     }else if(!strcmp(input, "irread")){
@@ -71,6 +73,21 @@ void blink(){
         digitalWrite(led, LOW);
         if(i != 2) delay(500);
     }
+}
+
+/**
+ *  Print the time since the current program started running
+ */
+void uptime(){
+    unsigned long time = millis() / 1000;
+//    unsigned int seconds = time % 60;
+//    unsigned int minutes = (time / 60) % 60;
+//    unsigned int hours = (time / 3600) % 24;
+
+    char uptime[64];
+//    sprintf(uptime, "Uptime (%d seconds total): %d hours, %d minutes, %d seconds", time, hours, minutes, test);
+    sprintf(uptime, "Uptime: %d seconds", time);
+    Serial.print(uptime);
 }
 
 /**
