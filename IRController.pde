@@ -213,6 +213,12 @@ void irplay(char *args){
         if(args != NULL)
             repeat = atoi(args);
 
+        #ifdef DEBUG
+        Serial.print("Sending IR-code ");
+        Serial.print(repeat);
+        Serial.print(" times.\n");
+        #endif
+
         for(int i = 0; i < repeat; i++){
             irsend.sendRaw(ir_code_store, ir_code_len, 36);
         
